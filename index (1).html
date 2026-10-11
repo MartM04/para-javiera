@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#070b18">
+<meta name="robots" content="noindex">
+<title>Para mi Javiera 🖤</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --noche:#070b18; --negro:#0a0f1f; --gris:#7d8aa6; --pale:#eef0f6; --rosa:#a8566e;
+  --serif:"Cormorant Garamond","Iowan Old Style","Palatino Linotype",Georgia,serif;
+  --display:"IM Fell English","Palatino Linotype",Georgia,serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%;background:var(--noche)}
+body{font-family:var(--serif);color:var(--pale);overflow-x:hidden;-webkit-text-size-adjust:100%;
+  background:radial-gradient(ellipse at 50% 0%,#17224a 0%,#0c1330 45%,var(--noche) 100%) fixed}
+.sky{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+.star{position:absolute;width:2px;height:2px;border-radius:50%;background:#dfe6ff;opacity:.5;animation:twinkle var(--d,6s) ease-in-out infinite;animation-delay:var(--l,0s)}
+@keyframes twinkle{0%,100%{opacity:.15;transform:scale(1)}50%{opacity:.85;transform:scale(1.5)}}
+.moon{position:absolute;top:7vh;left:50%;width:min(52vw,230px);aspect-ratio:1;transform:translateX(-50%);border-radius:50%;
+  background:radial-gradient(circle at 36% 34%,#fff 0%,#e9edf8 40%,#b9c3dc 100%);
+  box-shadow:0 0 50px 12px rgba(190,205,255,.28),0 0 140px 50px rgba(120,140,220,.18);animation:glow 7s ease-in-out infinite}
+.moon::before,.moon::after{content:"";position:absolute;border-radius:50%;background:rgba(120,135,175,.22)}
+.moon::before{width:17%;height:17%;top:24%;left:56%}
+.moon::after{width:11%;height:11%;top:58%;left:30%;box-shadow:34px -20px 0 -1px rgba(120,135,175,.16)}
+@keyframes glow{0%,100%{box-shadow:0 0 50px 12px rgba(190,205,255,.25),0 0 140px 50px rgba(120,140,220,.15)}50%{box-shadow:0 0 64px 18px rgba(200,215,255,.38),0 0 170px 64px rgba(120,140,220,.22)}}
+.mist{position:fixed;left:0;right:0;bottom:0;height:34vh;pointer-events:none;background:linear-gradient(to top,rgba(7,11,24,.95),transparent)}
+.branches{position:fixed;bottom:0;width:min(48vw,260px);height:min(60vh,380px);pointer-events:none;opacity:.9}
+.branches.l{left:0}.branches.r{right:0;transform:scaleX(-1)}
+.branches path{fill:none;stroke:#03060f;stroke-width:3;stroke-linecap:round}
+.branches .rose{fill:var(--rosa);stroke:none;opacity:.7}
+.branches .petal{fill:#4b2433;stroke:none}
+
+/* PANTALLA INICIAL */
+.intro{position:relative;z-index:2;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
+  text-align:center;padding:24px 24px calc(14vh + env(safe-area-inset-bottom,0px));transition:opacity 1.2s ease,transform 1.2s ease,visibility 0s 1.2s}
+.intro.out{opacity:0;transform:scale(1.04) translateY(-14px);visibility:hidden;pointer-events:none}
+.intro h1{font-family:var(--display);font-weight:400;font-size:clamp(2.1rem,9vw,3.6rem);letter-spacing:.02em;text-shadow:0 0 28px rgba(160,180,255,.45)}
+.intro p{font-style:italic;font-size:clamp(1.15rem,4.6vw,1.5rem);color:#c3cbe0;margin:.7em 0 1.8em;max-width:22em}
+.fade{opacity:0;animation:rise 2.4s ease forwards}
+.f1{animation-delay:.8s}.f2{animation-delay:2.6s}.f3{animation-delay:4.4s}
+@keyframes rise{from{opacity:0;transform:translateY(10px);filter:blur(3px)}to{opacity:1;transform:none;filter:none}}
+.btn{font-family:var(--display);font-size:1.2rem;color:var(--pale);background:rgba(15,22,48,.55);border:1px solid rgba(190,205,255,.45);
+  border-radius:999px;padding:.95em 2em;min-height:52px;cursor:pointer;-webkit-tap-highlight-color:transparent;
+  box-shadow:0 0 22px rgba(120,140,220,.2),inset 0 0 14px rgba(168,86,110,.12);transition:box-shadow .4s,border-color .4s,transform .3s}
+.btn:hover,.btn:focus-visible{border-color:#dbe3ff;box-shadow:0 0 34px rgba(160,180,255,.4),inset 0 0 18px rgba(168,86,110,.22);transform:translateY(-2px);outline:none}
+.btn:active{transform:scale(.97)}
+
+/* CARTA */
+.stage{position:relative;z-index:3;display:none;padding:28px 16px calc(60px + env(safe-area-inset-bottom,0px))}
+.stage.on{display:block}
+.scroll{position:relative;max-width:640px;margin:0 auto;padding:clamp(34px,8vw,64px) clamp(22px,7vw,56px);color:#2a2230;
+  background:radial-gradient(ellipse at 50% 0%,#f4efe6 0%,#e7dfd2 70%,#d9cfbe 100%);
+  border-radius:6px 6px 14px 14px;box-shadow:0 30px 80px rgba(0,0,0,.65),0 0 60px rgba(130,150,230,.18),inset 0 0 60px rgba(120,90,60,.22);
+  clip-path:inset(0 0 100% 0);opacity:0;transform:translateY(24px) scale(.96)}
+.stage.on .scroll{animation:unroll 2.6s cubic-bezier(.3,.7,.2,1) forwards}
+@keyframes unroll{0%{clip-path:inset(0 0 100% 0);opacity:0;transform:translateY(24px) scale(.96)}12%{opacity:1}100%{clip-path:inset(0 0 -40px 0);opacity:1;transform:none}}
+.scroll::before,.scroll::after{content:"";position:absolute;left:-6px;right:-6px;height:16px;border-radius:10px;
+  background:linear-gradient(#cdbfa6,#a99878 60%,#85775c);box-shadow:0 4px 10px rgba(0,0,0,.4)}
+.scroll::before{top:-8px}.scroll::after{bottom:-8px}
+.scroll h2{font-family:var(--display);font-weight:400;font-size:clamp(1.7rem,7vw,2.3rem);text-align:center;color:#2b2f55;margin-bottom:.2em}
+.orn{text-align:center;color:var(--rosa);letter-spacing:.7em;margin:0 0 1.4em .7em;font-size:.9rem}
+.scroll p{font-size:clamp(1.18rem,4.6vw,1.34rem);line-height:1.62;margin-bottom:1.15em;text-wrap:pretty;hyphens:auto}
+.scroll .l{opacity:0;animation:rise 1.8s ease forwards}
+.scroll .hi{font-style:italic;color:#3a2f5a}
+.scroll .sign{text-align:center;font-style:italic;color:#4a2a3a;margin-top:1.8em}
+.scroll .hi-last{text-align:center;font-family:var(--display);font-size:clamp(1.25rem,5vw,1.5rem);color:#2b2f55;line-height:1.5}
+.scroll .corner{position:absolute;font-size:1.1rem;color:var(--rosa);opacity:.65}
+.c1{top:26px;left:16px}.c2{top:26px;right:16px}.c3{bottom:26px;left:16px}.c4{bottom:26px;right:16px}
+.again{display:block;margin:34px auto 0;font-size:1rem;min-height:48px}
+
+@media (hover:hover){.scroll p{transition:color .4s}.scroll p:hover{color:#000}}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .fade,.scroll .l{opacity:1}
+  .stage.on .scroll{clip-path:none;opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<div class="sky" aria-hidden="true" id="sky"><div class="moon"></div></div>
+<div class="mist" aria-hidden="true"></div>
+
+<svg class="branches l" viewBox="0 0 200 300" aria-hidden="true" preserveAspectRatio="xMinYMax meet">
+  <path d="M0 300 C20 220 30 160 70 110 S120 40 150 10"/>
+  <path d="M30 200 C60 190 80 170 110 175"/><path d="M52 150 C40 120 50 100 36 76"/>
+  <path d="M84 100 C110 100 128 88 160 96"/><path d="M108 62 C100 42 110 30 104 14"/>
+  <path d="M0 260 C30 250 50 255 78 240"/>
+  <circle class="rose" cx="110" cy="175" r="9"/><circle class="petal" cx="110" cy="175" r="4"/>
+  <circle class="rose" cx="36" cy="76" r="7"/><circle class="petal" cx="36" cy="76" r="3"/>
+  <circle class="rose" cx="160" cy="96" r="6"/>
+</svg>
+<svg class="branches r" viewBox="0 0 200 300" aria-hidden="true" preserveAspectRatio="xMinYMax meet">
+  <path d="M0 300 C25 230 20 170 60 120 S110 50 140 20"/>
+  <path d="M26 210 C55 205 78 180 104 186"/><path d="M60 140 C48 118 58 96 44 70"/>
+  <path d="M92 90 C118 92 134 80 166 86"/><path d="M0 255 C28 248 52 250 74 236"/>
+  <circle class="rose" cx="104" cy="186" r="8"/><circle class="petal" cx="104" cy="186" r="3.5"/>
+  <circle class="rose" cx="44" cy="70" r="6"/><circle class="rose" cx="166" cy="86" r="5"/>
+</svg>
+
+<main>
+  <section class="intro" id="intro">
+    <h1 class="fade f1">Para mi Javiera 🖤</h1>
+    <p class="fade f2">Mi persona favorita en este mundo extraño.</p>
+    <button class="btn fade f3" id="open" type="button">Abrir mi carta 🥀</button>
+  </section>
+
+  <section class="stage" id="stage" aria-label="Carta para Javiera">
+    <article class="scroll" id="letter" tabindex="-1">
+      <span class="corner c1" aria-hidden="true">✦</span><span class="corner c2" aria-hidden="true">✦</span>
+      <span class="corner c3" aria-hidden="true">🥀</span><span class="corner c4" aria-hidden="true">☾</span>
+      <h2 class="l">Para mi Javiera 🖤</h2>
+      <div class="orn" aria-hidden="true">✦ ♥ ☾ ♥ ✦</div>
+
+      <p class="l hi">Mi querida Javiera:</p>
+      <p class="l">Si nuestro amor fuera una película de Tim Burton, sería mi historia favorita, una de esas que mezclan la oscuridad con la ternura y que, aunque parezcan sacadas de un mundo extraño, esconden los sentimientos más bonitos.</p>
+      <p class="l">Ya casi son dos años a tu lado, y a veces me cuesta creer lo rápido que ha pasado el tiempo. Casi dos años de tenerte conmigo, de crear recuerdos, de aprender a amarte cada día un poquito más y de darme cuenta de que, entre tantas personas en este mundo, mi corazón te eligió a ti.</p>
+      <p class="l">Como en <em>El cadáver de la novia</em>, quiero que sepas que siempre desearé aliviar tus penas, acompañarte en tus días grises y ser ese lugar al que puedas volver cuando el mundo se vuelva demasiado difícil. Y como en <em>El joven manos de tijera</em>, sé que hay sentimientos tan profundos que las palabras no siempre alcanzan para expresarlos.</p>
+      <p class="l">Quizás nuestro amor no sea un cuento de hadas perfecto, pero es mucho más bonito para mí, porque es nuestro. Tiene nuestras risas, nuestros momentos, nuestras pequeñas locuras y todo aquello que hemos construido juntos. Y si pudiera elegir de nuevo, entre todos los mundos posibles, volvería a encontrarte a ti, incluso en el más oscuro de todos.</p>
+      <p class="l">Gracias por estos casi dos años, por existir en mi vida y por darme tantos motivos para seguir eligiéndote. No sé qué nos depara el futuro, pero sí sé que quiero seguir escribiendo esta historia contigo, página por página, sin importar cuántas vueltas dé la trama.</p>
+      <p class="l">Porque si algo tengo claro, Javiera, es que mi amor por ti no necesita un final de película para ser eterno; me basta con seguir teniéndote a mi lado y amarte un día más.</p>
+      <p class="l hi-last">Tú eres mi historia favorita, mi lugar seguro y mi pedacito de magia en este mundo tan extraño.</p>
+      <p class="l sign">Con todo mi amor, hoy y en todos los capítulos que nos quedan por vivir. 🖤🦇🥀</p>
+    </article>
+    <button class="btn again" id="back" type="button">Volver a la luna ☾</button>
+  </section>
+</main>
+
+<script>
+(function(){
+  // Estrellas generadas una sola vez (ligero)
+  var sky=document.getElementById('sky'),f=document.createDocumentFragment(),n=window.innerWidth<700?55:90;
+  for(var i=0;i<n;i++){
+    var s=document.createElement('i');s.className='star';
+    s.style.left=Math.random()*100+'%';s.style.top=Math.random()*85+'%';
+    var z=Math.random()<.2?3:2;s.style.width=s.style.height=z+'px';
+    s.style.setProperty('--d',(5+Math.random()*6).toFixed(1)+'s');
+    s.style.setProperty('--l',(-Math.random()*8).toFixed(1)+'s');
+    f.appendChild(s);
+  }
+  sky.appendChild(f);
+
+  var intro=document.getElementById('intro'),stage=document.getElementById('stage'),
+      letter=document.getElementById('letter'),lines=letter.querySelectorAll('.l');
+  // Aparición gradual de cada párrafo, escalonada
+  for(var j=0;j<lines.length;j++){lines[j].style.animationDelay=(1.4+j*0.9)+'s'}
+
+  document.getElementById('open').addEventListener('click',function(){
+    intro.classList.add('out');
+    setTimeout(function(){
+      stage.classList.add('on');
+      window.scrollTo({top:0});
+      letter.focus({preventScroll:true});
+    },900);
+  });
+  document.getElementById('back').addEventListener('click',function(){
+    stage.classList.remove('on');
+    intro.classList.remove('out');
+    window.scrollTo({top:0});
+  });
+})();
+</script>
+</body>
+</html>
